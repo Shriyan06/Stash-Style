@@ -35,7 +35,7 @@ export function Footer() {
       <div className="container-x grid gap-12 py-16 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-4">
           <Link href="/" aria-label="Stash & Style, home" className="inline-block rounded-sm">
-            <Wordmark className="text-[2rem] [&_span]:text-accent" />
+            <Wordmark onDark className="text-[2rem]" logoClassName="h-20" />
           </Link>
           <p className="mt-4 max-w-sm text-[0.9375rem] text-bg/75">{site.blurb}</p>
           <SocialLinks className="mt-5" />

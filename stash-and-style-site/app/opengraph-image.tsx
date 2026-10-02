@@ -1,3 +1,5 @@
+import { existsSync, readFileSync } from "node:fs";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/config/site";
 
@@ -7,6 +9,8 @@ export const contentType = "image/png";
 
 /** Default social share image. Uses system fonts so the build never needs the network. */
 export default function OpengraphImage() {
+  const logoFile = path.join(process.cwd(), "public/brand/logo-light.png");
+  const logo = existsSync(logoFile) ? `data:image/png;base64,${readFileSync(logoFile).toString("base64")}` : null;
   return new ImageResponse(
     <div
       style={{
@@ -21,17 +25,21 @@ export default function OpengraphImage() {
       }}
     >
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%" }}>
-        <div
-          style={{
-            fontSize: 28,
-            letterSpacing: 6,
-            textTransform: "uppercase",
-            color: "#C9A35E",
-            fontFamily: "sans-serif",
-          }}
-        >
-          {site.name}
-        </div>
+        {logo ? (
+          <img src={logo} alt="" width={177} height={104} />
+        ) : (
+          <div
+            style={{
+              fontSize: 28,
+              letterSpacing: 6,
+              textTransform: "uppercase",
+              color: "#C9A35E",
+              fontFamily: "sans-serif",
+            }}
+          >
+            {site.name}
+          </div>
+        )}
         <div style={{ display: "flex", flexDirection: "column", fontSize: 92, lineHeight: 1.02 }}>
           <span>Everyday jewelry,</span>
           <span style={{ color: "#C9A35E", fontStyle: "italic" }}>under $35.</span>

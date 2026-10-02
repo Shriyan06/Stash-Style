@@ -89,5 +89,10 @@
     "placeholder": true,
     "source": "placeholder"
   },
-  "logo": null
+  "logo": {
+    "src": "/brand/logo.png",
+    "srcOnDark": "/brand/logo-light.png",
+    "width": 262,
+    "height": 154
+  }
 }

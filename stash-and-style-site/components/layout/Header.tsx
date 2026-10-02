@@ -77,7 +77,7 @@ export function Header() {
       <div
         className={cn(
           "container-x grid grid-cols-[1fr_auto_1fr] items-center transition-[height] duration-200 ease-brand",
-          scrolled ? "h-14" : "h-[4.5rem]",
+          scrolled ? "h-16" : "h-[4.75rem] sm:h-20",
         )}
       >
         {/* Left: menu (mobile) / nav (desktop) */}
@@ -127,10 +127,12 @@ export function Header() {
         {/* Center: logo */}
         <Link href="/" className="justify-self-center rounded-sm px-1" aria-label="Stash & Style, home">
           <Wordmark
+            priority
             className={cn(
               "transition-[font-size] duration-200",
               scrolled ? "text-[1.5rem]" : "text-[1.625rem] sm:text-[1.875rem]",
             )}
+            logoClassName={cn("transition-[height] duration-200 ease-brand", scrolled ? "h-12" : "h-[3.75rem] sm:h-16")}
           />
         </Link>
 

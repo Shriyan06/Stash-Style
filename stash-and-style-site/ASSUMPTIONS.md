@@ -9,8 +9,8 @@ Every decision made where the brief was silent, every placeholder, and every dep
   `/public/brand` is a **generated placeholder** at the target size: a tinted gradient with a thin gold line
   drawing of the relevant jewelry (hoops, bangles, stacked rings, chains). `npm run brand:fetch` retries the real
   downloads, applies the "≥ 800px wide" rule, writes `data/brand-images.json`, and regenerates `blurDataURL`s.
-- **No logo file** for the same reason. The header and footer use the typographic wordmark ("Stash & Style" in
-  Cormorant Garamond with a gold italic ampersand). If `public/brand/logo.png` exists, it's used automatically.
+- **No logo file could be downloaded** for the same reason; you uploaded it later (see Round 2). The typeset
+  wordmark remains as an automatic fallback if `public/brand/logo.png` is ever removed.
 - Placeholder images use `alt=""` because they're decorative art, not photos of the product. Each entry in
   `data/brand-images.json` keeps an `intendedAlt` to use once the real photo is in place.
 - The repository root also contains an earlier upload, `stash-style-website-updated-cart.zip`. It was not used.
@@ -25,8 +25,11 @@ Every decision made where the brief was silent, every placeholder, and every dep
   footer, Necklaces tile) with a light page behind products so they stay easy to see. All colours live in
   `app/globals.css`; send me the old site's hex codes and it's a 1-line change each. The old warm tokens were renamed:
   `--blush` → `--tint` (pale blue), `--sage` → `--champagne`. Focus rings switch to gold on navy surfaces.
-- **Original logo: not done.** The logo file couldn't be downloaded (same block). Upload it in chat and it drops into
-  `public/brand/logo.png`. A light or white version is also needed if the logo is dark, because the footer is navy.
+- **Original logo: done** (uploaded in chat). `public/brand/logo.png` is your transparent PNG, trimmed;
+  `logo-light.png` is a brightened copy generated for the navy footer (the bronze lettering is too dark on navy);
+  `monogram.png` and `app/icon.png` / `app/apple-icon.png` use the "SS" emblem on navy for browser tabs and home
+  screens. The header uses the full stacked logo, so the header is a little taller (80px, 64px when scrolled). The
+  file is 262×154px; a larger version (600px+ wide) would look sharper on high-resolution screens.
 - **Slideshow** replaces the single hero image: 3 slides (`content/home.ts`), crossfade + slow zoom, staggered text,
   autoplay with a visible pause button, arrows, dots with a progress bar, swipe and ← → keys. Autoplay is off for
   visitors with reduced motion on. Slides 2–3 load their images 2.5s after the page so they don't slow slide 1.

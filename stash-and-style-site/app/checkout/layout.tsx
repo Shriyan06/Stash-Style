@@ -10,7 +10,7 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
       <header className="border-b border-line bg-surface">
         <div className="container-x flex h-16 items-center justify-between gap-4 sm:h-20">
           <Link href="/" aria-label="Stash & Style, home" className="rounded-sm">
-            <Wordmark className="text-[1.6rem] sm:text-[1.9rem]" />
+            <Wordmark priority className="text-[1.6rem] sm:text-[1.9rem]" logoClassName="h-12 sm:h-14" />
           </Link>
           <div className="flex items-center gap-1">
             <span className="hidden items-center gap-1.5 text-sm text-muted sm:inline-flex">

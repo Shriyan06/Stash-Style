@@ -10,7 +10,7 @@ export type BrandImage = {
 };
 
 type Manifest = Record<string, BrandImage | null> & {
-  logo: { src: string; width: number; height: number } | null;
+  logo: { src: string; srcOnDark?: string; width: number; height: number } | null;
 };
 
 const manifest = brandImages as unknown as Manifest;

@@ -62,7 +62,7 @@ export function organizationLd() {
     "@type": "Organization",
     name: site.name,
     url: env.siteUrl,
-    logo: absoluteUrl("/icon.svg"),
+    logo: absoluteUrl("/brand/logo.png"),
     ...(sameAs.length ? { sameAs } : {}),
     ...(site.supportEmail ? { email: site.supportEmail } : {}),
   };

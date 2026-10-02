@@ -290,14 +290,36 @@ for (const img of images) {
   };
 }
 
+/* ---------- logo ----------
+ * public/brand/logo.png = logo for light backgrounds (transparent PNG).
+ * public/brand/logo-light.png = brightened copy for the navy footer (generated).
+ * A logo you placed by hand is never overwritten by a failed download.
+ */
 const logoDest = path.join(outDir, logo.file);
-const logoOk = logo.urls.some((u) => tryDownload(u, logoDest));
-if (logoOk) {
+const tmp = logoDest + ".download";
+if (logo.urls.some((u) => tryDownload(u, tmp))) {
+  await sharp(tmp).trim({ threshold: 1 }).png().toFile(logoDest);
+  rmSync(tmp, { force: true });
+  report.push("logo: downloaded from the store");
+} else if (existsSync(logoDest)) {
+  report.push("logo: download failed → kept the existing public/brand/logo.png");
+}
+if (existsSync(logoDest)) {
+  const lightDest = path.join(outDir, "logo-light.png");
+  await sharp(logoDest)
+    .linear([1.55, 1.5, 1.4], [38, 30, 18])
+    .png({ palette: true, quality: 90, compressionLevel: 9 })
+    .toFile(lightDest);
   const meta = await sharp(logoDest).metadata();
-  manifest.logo = { src: `/brand/${logo.file}`, width: meta.width, height: meta.height };
+  manifest.logo = {
+    src: `/brand/${logo.file}`,
+    srcOnDark: "/brand/logo-light.png",
+    width: meta.width,
+    height: meta.height,
+  };
 } else {
   manifest.logo = null;
-  report.push("logo: download failed → header uses the text wordmark");
+  report.push("logo: no logo file → header uses the text wordmark");
 }
 
 writeFileSync(path.join(root, "data/brand-images.json"), JSON.stringify(manifest, null, 2) + "\n");
