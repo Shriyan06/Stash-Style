@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 type Tone = "new" | "sale" | "soldout" | "demo";
 
 const tones: Record<Tone, string> = {
-  new: "bg-sage text-ink",
+  new: "bg-champagne text-ink",
   sale: "bg-danger text-surface",
   soldout: "bg-surface text-muted border border-line",
   demo: "bg-ink text-surface",

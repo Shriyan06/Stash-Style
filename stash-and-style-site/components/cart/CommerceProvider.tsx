@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { createContext, useCallback, useContext, useMemo, useRef, useState } from "react";
 import {
   addLine,
@@ -14,7 +15,7 @@ import {
 } from "@/lib/cart/store";
 import { toggleWishlist, wishlistStore } from "@/lib/wishlist/store";
 
-type Panel = "cart" | "search" | "menu" | "checkout" | null;
+type Panel = "cart" | "search" | "menu" | null;
 
 type Ctx = {
   /** True when the Shopify provider is active (real checkout). */
@@ -31,6 +32,7 @@ type Ctx = {
 const CommerceCtx = createContext<Ctx | null>(null);
 
 export function CommerceProvider({ connected, children }: { connected: boolean; children: React.ReactNode }) {
+  const router = useRouter();
   const [panel, setPanel] = useState<Panel>(null);
   const [message, setMessage] = useState("");
   const [checkingOut, setCheckingOut] = useState(false);
@@ -46,7 +48,9 @@ export function CommerceProvider({ connected, children }: { connected: boolean; 
   const checkout = useCallback(async () => {
     setCheckoutError(null);
     if (!connected) {
-      setPanel("checkout");
+      // no payments yet: show the branded checkout preview
+      setPanel(null);
+      router.push("/checkout");
       return;
     }
     const { lines, note } = cartStore.get();
@@ -68,7 +72,7 @@ export function CommerceProvider({ connected, children }: { connected: boolean; 
       setCheckoutError(e instanceof Error ? e.message : "Checkout is unavailable right now.");
       setCheckingOut(false);
     }
-  }, [connected]);
+  }, [connected, router]);
 
   const value = useMemo<Ctx>(
     () => ({
@@ -110,6 +114,7 @@ export function useCart() {
     subtotal: cartSubtotal(state),
     add(line: Omit<CartLine, "quantity">, qty = 1, { openDrawer = true } = {}) {
       addLine(line, qty);
+      window.dispatchEvent(new Event("ss:added"));
       announce(`${line.title} added to your bag.`);
       if (openDrawer) open("cart");
     },

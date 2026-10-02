@@ -142,7 +142,7 @@ function SearchPanel({ onClose }: { onClose: () => void }) {
                 {results.map((p) => (
                   <li key={p.handle}>
                     <Link href={`/products/${p.handle}`} className="group block">
-                      <div className="relative aspect-[4/5] overflow-hidden rounded-img bg-blush">
+                      <div className="relative aspect-[4/5] overflow-hidden rounded-img bg-tint">
                         <ProductImage
                           image={p.image}
                           sizes="(min-width: 768px) 20vw, 45vw"

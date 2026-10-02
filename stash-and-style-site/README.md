@@ -25,19 +25,20 @@ The site runs with **zero** environment variables set. See `.env.example` for th
 
 ## Scripts
 
-| Script                    | What it does                                                                                |
-| ------------------------- | ------------------------------------------------------------------------------------------- |
-| `npm run lint`            | ESLint, zero warnings allowed                                                               |
-| `npm run typecheck`       | Generates route types, then `tsc --noEmit` (strict)                                         |
-| `npm run build`           | Runs `check:prelaunch` (lists every `[REPLACE BEFORE LAUNCH]`), then `next build`           |
-| `npm run check`           | lint + typecheck + contrast + build                                                         |
-| `npm run check:contrast`  | WCAG AA check of every colour-token pair, read straight from `app/globals.css`              |
-| `npm run check:prelaunch` | Lists placeholders and empty business settings. `PRELAUNCH_STRICT=1` makes it fail.         |
-| `npm run test:smoke`      | Playwright keyboard/smoke test against a running server (`BASE_URL=http://localhost:3000`)  |
-| `npm run screenshots`     | Screenshots routes at 390px and 1280px, flags overflow and console errors                   |
-| `npm run brand:fetch`     | Re-tries downloading brand images from the current store; generates placeholders on failure |
-| `npm run verify:shopify`  | Read-only check of your Shopify Storefront API credentials                                  |
-| `npm run format`          | Prettier                                                                                    |
+| Script                    | What it does                                                                                  |
+| ------------------------- | --------------------------------------------------------------------------------------------- |
+| `npm run lint`            | ESLint, zero warnings allowed                                                                 |
+| `npm run typecheck`       | Generates route types, then `tsc --noEmit` (strict)                                           |
+| `npm run build`           | Runs `check:prelaunch` (lists every `[REPLACE BEFORE LAUNCH]`), then `next build`             |
+| `npm run check`           | lint + typecheck + contrast + build                                                           |
+| `npm run check:contrast`  | WCAG AA check of every colour-token pair, read straight from `app/globals.css`                |
+| `npm run check:prelaunch` | Lists placeholders and empty business settings. `PRELAUNCH_STRICT=1` makes it fail.           |
+| `npm run test:smoke`      | Playwright keyboard/smoke test against a running server (`BASE_URL=http://localhost:3000`)    |
+| `npm run screenshots`     | Screenshots routes at 390px and 1280px, flags overflow and console errors                     |
+| `npm run demo:images`     | Renders the studio-style jewelry illustrations used by demo mode and as stand-in brand images |
+| `npm run brand:fetch`     | Re-tries downloading brand images from the current store; generates placeholders on failure   |
+| `npm run verify:shopify`  | Read-only check of your Shopify Storefront API credentials                                    |
+| `npm run format`          | Prettier                                                                                      |
 
 The Playwright scripts use the Chromium in `/opt/pw-browsers` by default. Elsewhere, set `CHROMIUM_PATH` to any
 Chrome/Chromium binary.
@@ -74,10 +75,19 @@ and Shopify when the two `SHOPIFY_*` variables are set.
 
 ## Demo mode
 
-`NEXT_PUBLIC_DEMO_MODE=true` merges `data/demo-products.ts` into the catalog. These are "Demo Ring 01" and similar:
-tinted blocks with no photos, a DEMO ribbon, and a banner at the top of every page. They exist so you can check
-cards, badges (New / Sale / Sold out), swatches, filters, variant selection and the bag. Demo builds are
-`noindex` with an empty sitemap and `robots.txt` disallowing everything. Never deploy one.
+`NEXT_PUBLIC_DEMO_MODE=true` merges `data/demo-products.ts` into the catalog: 12 sample products ("Everyday Hoop
+Earrings", "Stacking Ring Set", …) with a DEMO ribbon on every card and a banner on every page. Their pictures are
+**rendered illustrations** (`npm run demo:images` → `public/demo/`), not photos of real stock. They exist so you can
+check cards, badges (New / Sale / Sold out), swatches, filters, variant selection, the bag and the checkout preview.
+Demo builds are `noindex` with an empty sitemap and `robots.txt` disallowing everything. Never deploy one.
+
+## Checkout
+
+- **Shopify not connected (today):** "Checkout" opens `/checkout`, a branded preview of the checkout steps (contact,
+  delivery, shipping, payment, order summary). A banner says it's a preview; nothing is saved or sent, card details
+  are never collected (the card area is not made of inputs), and "Pay now" only confirms that no order was placed.
+- **Shopify connected:** "Checkout" goes to Shopify's real hosted checkout. Its layout is Shopify's; set your logo,
+  colours and fonts in Shopify admin → Settings → Checkout → Customize so it matches this site.
 
 ## Connect Shopify
 

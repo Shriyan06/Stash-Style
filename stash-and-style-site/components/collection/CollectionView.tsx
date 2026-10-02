@@ -158,7 +158,7 @@ export function CollectionView({
                 <button
                   type="button"
                   onClick={c.clear}
-                  className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-blush px-4 text-sm hover:bg-[#ecd4ca]"
+                  className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-tint px-4 text-sm hover:bg-[#d9e3f3]"
                 >
                   {c.label}
                   <CloseIcon size={14} />

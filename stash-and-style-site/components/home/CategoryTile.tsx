@@ -10,13 +10,13 @@ export function MonogramArt({ label, className }: { label: string; className?: s
   return (
     <div
       aria-hidden="true"
-      className={cn("absolute inset-0 flex flex-col items-center justify-center bg-blush", className)}
+      className={cn("absolute inset-0 flex flex-col items-center justify-center bg-navy", className)}
     >
-      <span className="font-display text-[clamp(3.5rem,9vw,6rem)] leading-none font-medium text-accent-strong italic">
+      <span className="font-display text-[clamp(3.5rem,9vw,6rem)] leading-none font-medium text-accent italic">
         S&amp;S
       </span>
       <span className="mt-3 h-px w-10 bg-accent" />
-      <span className="eyebrow mt-3 text-ink/70">{label}</span>
+      <span className="eyebrow mt-3 text-surface/80">{label}</span>
     </div>
   );
 }
@@ -35,7 +35,7 @@ export function CategoryTile({
   const img = brandImage(collection.image);
   return (
     <Link href={`/collections/${collection.handle}`} className={cn("group block", className)}>
-      <div className={cn("relative overflow-hidden rounded-img bg-blush", aspect)}>
+      <div className={cn("relative overflow-hidden rounded-img bg-tint", aspect)}>
         {img ? (
           <Image
             src={img.src}

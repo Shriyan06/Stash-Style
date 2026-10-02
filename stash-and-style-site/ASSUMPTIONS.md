@@ -17,6 +17,40 @@ Every decision made where the brief was silent, every placeholder, and every dep
   **Note:** it contains a `.env.local` with a Shopify Storefront token committed to git. Storefront tokens are
   designed to be public-facing, but consider rotating it and removing the zip from history.
 
+## Round 2 changes (your feedback)
+
+- **Navy theme.** You asked for a dark-blue look like the old site. I couldn't load the old site to sample its
+  exact colours (blocked, see above), so the navy is my choice: `--navy` `#142A57`, `--ink` `#0F1D3A`, gold
+  `#C9A35E`. I read "dark blue focused" as navy for the big surfaces (announcement bar, slideshow, gift section,
+  footer, Necklaces tile) with a light page behind products so they stay easy to see. All colours live in
+  `app/globals.css`; send me the old site's hex codes and it's a 1-line change each. The old warm tokens were renamed:
+  `--blush` → `--tint` (pale blue), `--sage` → `--champagne`. Focus rings switch to gold on navy surfaces.
+- **Original logo: not done.** The logo file couldn't be downloaded (same block). Upload it in chat and it drops into
+  `public/brand/logo.png`. A light or white version is also needed if the logo is dark, because the footer is navy.
+- **Slideshow** replaces the single hero image: 3 slides (`content/home.ts`), crossfade + slow zoom, staggered text,
+  autoplay with a visible pause button, arrows, dots with a progress bar, swipe and ← → keys. Autoplay is off for
+  visitors with reduced motion on. Slides 2–3 load their images 2.5s after the page so they don't slow slide 1.
+- **The $35 tag** kept its swing-in, swings again whenever slide 1 comes back and on hover, and has a small gold
+  glint.
+- **Added animations:** bag icon wiggles and count pops when something's added, heart pops when saved, product cards
+  lift on hover, grids stagger in on scroll, gold buttons get a shine sweep, announcement messages fade, gift cards
+  rise on hover. All of them stop under `prefers-reduced-motion`.
+- **"Real" images.** No photo source was reachable (store, Shopify CDN, Unsplash, Pexels, Wikimedia all blocked), so
+  `scripts/render-demo-images.mjs` renders studio-style jewelry illustrations (metallic gold/silver/rose,
+  pearls, stones, soft shadows, light and navy-velvet backdrops). Demo products, collection tiles and the slideshow
+  use them. They are labelled as illustrations in alt text and must be replaced with real photos before launch.
+- **Demo product names** changed from "Demo Ring 01" to descriptive names so the preview reads like a real shop.
+  The DEMO ribbon, the demo banner and "isn't for sale" in each description stay.
+- **Checkout preview.** The original brief said "don't fake an order flow"; you asked to see the checkout, so
+  `/checkout` is now a branded _preview_: clearly bannered, nothing saved or sent, no card inputs at all, and "Pay
+  now" only confirms that no order was placed. With Shopify connected, checkout goes straight to Shopify, whose
+  layout is Shopify's own (logo/colours/fonts are customisable there). The old "Checkout opens once the store is
+  connected" modal was removed.
+- **Route groups:** store pages moved to `app/(store)/` so checkout can have its own minimal header (logo, secure
+  badge, back to bag), like a real checkout. URLs didn't change.
+- **Editorial banner** under the slideshow changed from bracelets to "Layer it up" (necklaces), since slide 2 now
+  covers stacking bracelets.
+
 ## Stack and dependencies
 
 Runtime dependencies (5 of the 10 allowed):

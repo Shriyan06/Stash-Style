@@ -31,7 +31,7 @@ export function WishlistButton({
         className,
       )}
     >
-      <HeartIcon filled={saved} className={cn(saved && "text-danger")} />
+      <HeartIcon key={String(saved)} filled={saved} className={cn(saved && "heart-pop text-danger")} />
       {withLabel && <span>{saved ? "Saved" : "Save"}</span>}
     </button>
   );

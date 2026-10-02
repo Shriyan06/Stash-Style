@@ -30,8 +30,8 @@ export function ProductCard({
     "[@media(hover:hover)]:translate-y-2 [@media(hover:hover)]:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100";
 
   return (
-    <article className="group relative flex flex-col">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-img bg-blush">
+    <article className="group lift relative flex flex-col">
+      <div className="lift-shadow relative aspect-[4/5] overflow-hidden rounded-img bg-tint">
         <ProductImage image={p.image} sizes={SIZES} priority={priority} className="zoom-img" title={p.title} />
         {p.secondImage && (
           <ProductImage

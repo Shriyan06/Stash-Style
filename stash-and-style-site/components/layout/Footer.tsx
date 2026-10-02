@@ -31,7 +31,7 @@ function LinkList({ title, links }: { title: string; links: { label: string; hre
 
 export function Footer() {
   return (
-    <footer className="mt-auto bg-ink text-bg">
+    <footer className="mt-auto bg-navy text-surface">
       <div className="container-x grid gap-12 py-16 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-4">
           <Link href="/" aria-label="Stash & Style, home" className="inline-block rounded-sm">

@@ -92,7 +92,7 @@ export default function AboutPage() {
             </ButtonLink>
           </div>
           {img && (
-            <div className="relative aspect-[4/5] overflow-hidden rounded-img bg-blush lg:sticky lg:top-24">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-img bg-tint lg:sticky lg:top-24">
               <Image
                 src={img.src}
                 alt={img.alt}

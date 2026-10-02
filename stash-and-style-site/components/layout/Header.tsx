@@ -16,8 +16,9 @@ function CountBadge({ n }: { n: number }) {
   if (!n) return null;
   return (
     <span
+      key={n}
       aria-hidden="true"
-      className="absolute top-1 right-0.5 inline-flex min-w-[1.125rem] items-center justify-center rounded-full bg-accent-strong px-1 text-[0.625rem] leading-[1.125rem] font-semibold text-accent-ink tabular-nums"
+      className="pop absolute top-1 right-0.5 inline-flex min-w-[1.125rem] items-center justify-center rounded-full bg-accent-strong px-1 text-[0.625rem] leading-[1.125rem] font-semibold text-accent-ink tabular-nums"
     >
       {n > 99 ? "99+" : n}
     </span>
@@ -30,6 +31,14 @@ export function Header() {
   const wishlist = useWishlist();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [added, setAdded] = useState(0);
+
+  // the bag icon wiggles whenever something is added
+  useEffect(() => {
+    const onAdd = () => setAdded((n) => n + 1);
+    window.addEventListener("ss:added", onAdd);
+    return () => window.removeEventListener("ss:added", onAdd);
+  }, []);
 
   useEffect(() => {
     let raf = 0;
@@ -154,7 +163,9 @@ export function Header() {
             aria-label={`Bag, ${count} ${count === 1 ? "item" : "items"}`}
             aria-haspopup="dialog"
           >
-            <BagIcon />
+            <span key={added} className={added ? "wiggle inline-flex" : "inline-flex"}>
+              <BagIcon />
+            </span>
             <CountBadge n={count} />
           </button>
         </div>

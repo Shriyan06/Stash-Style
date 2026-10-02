@@ -7,11 +7,11 @@ import { cn } from "@/lib/cn";
 export function EmptyDishArt({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 240 150" aria-hidden="true" className={cn("w-56", className)}>
-      <ellipse cx="120" cy="118" rx="98" ry="16" fill="#E8DFD5" />
-      <path d="M26 92c0 18 42 32 94 32s94-14 94-32" fill="#FFFFFF" stroke="#B8864B" strokeWidth="1.5" />
-      <ellipse cx="120" cy="92" rx="94" ry="22" fill="#F3E3DC" stroke="#B8864B" strokeWidth="1.5" />
-      <ellipse cx="120" cy="94" rx="70" ry="14" fill="none" stroke="#B8864B" strokeOpacity=".4" />
-      <g fill="none" stroke="#855A28" strokeWidth="1.6" className="origin-center">
+      <ellipse cx="120" cy="118" rx="98" ry="16" fill="#DDE3EE" />
+      <path d="M26 92c0 18 42 32 94 32s94-14 94-32" fill="#FFFFFF" stroke="#C9A35E" strokeWidth="1.5" />
+      <ellipse cx="120" cy="92" rx="94" ry="22" fill="#E8EEF8" stroke="#C9A35E" strokeWidth="1.5" />
+      <ellipse cx="120" cy="94" rx="70" ry="14" fill="none" stroke="#C9A35E" strokeOpacity=".4" />
+      <g fill="none" stroke="#8A6421" strokeWidth="1.6" className="origin-center">
         <path d="M150 28c10 0 18 8 18 18s-8 18-18 18" strokeDasharray="3 4" />
         <circle cx="96" cy="40" r="3" />
         <path d="M120 14v8M116 18h8" />

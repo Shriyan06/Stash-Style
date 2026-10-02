@@ -27,7 +27,7 @@ export function WishlistView() {
   if (!items.length) {
     return (
       <div className="flex flex-col items-center py-12 text-center">
-        <span className="inline-flex size-16 items-center justify-center rounded-full bg-blush">
+        <span className="inline-flex size-16 items-center justify-center rounded-full bg-tint">
           <HeartIcon size={26} />
         </span>
         <h2 className="mt-5 font-display text-h2">Nothing saved yet</h2>

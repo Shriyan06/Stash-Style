@@ -12,7 +12,7 @@ import { useCart, useCommerce } from "./CommerceProvider";
 export function CartEmpty({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="flex flex-col items-center px-2 py-10 text-center">
-      <span className="inline-flex size-16 items-center justify-center rounded-full bg-blush">
+      <span className="inline-flex size-16 items-center justify-center rounded-full bg-tint">
         <BagIcon size={26} />
       </span>
       <p className="mt-5 font-display text-h3">Your bag is empty</p>
@@ -77,35 +77,6 @@ export function CartDrawer() {
             </div>
           </>
         )}
-      </div>
-    </Sheet>
-  );
-}
-
-/** Shown instead of checkout while the store runs on local data. */
-export function CheckoutNotice() {
-  const { panel, close } = useCommerce();
-  return (
-    <Sheet open={panel === "checkout"} onClose={close} side="center" labelledBy="checkout-title">
-      <div className="p-6 sm:p-8">
-        <p className="eyebrow text-accent-strong">Almost there</p>
-        <h2 id="checkout-title" className="mt-2 font-display text-h2">
-          Checkout opens once the store is connected
-        </h2>
-        <p className="mt-3 text-muted">
-          This preview isn&rsquo;t linked to payments yet, so no order was placed and nothing was charged. Your bag is
-          saved on this device.
-        </p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <button
-            type="button"
-            onClick={close}
-            className="inline-flex min-h-12 items-center rounded-full bg-ink px-7 text-[0.9375rem] font-medium text-surface"
-            autoFocus
-          >
-            Back to my bag
-          </button>
-        </div>
       </div>
     </Sheet>
   );

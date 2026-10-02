@@ -13,8 +13,8 @@ export default function OpengraphImage() {
         width: "100%",
         height: "100%",
         display: "flex",
-        background: "#FBF7F2",
-        color: "#1F1B18",
+        background: "#142A57",
+        color: "#FFFFFF",
         padding: 80,
         position: "relative",
         fontFamily: "serif",
@@ -26,7 +26,7 @@ export default function OpengraphImage() {
             fontSize: 28,
             letterSpacing: 6,
             textTransform: "uppercase",
-            color: "#855A28",
+            color: "#C9A35E",
             fontFamily: "sans-serif",
           }}
         >
@@ -34,9 +34,9 @@ export default function OpengraphImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column", fontSize: 92, lineHeight: 1.02 }}>
           <span>Everyday jewelry,</span>
-          <span style={{ color: "#855A28", fontStyle: "italic" }}>under $35.</span>
+          <span style={{ color: "#C9A35E", fontStyle: "italic" }}>under $35.</span>
         </div>
-        <div style={{ fontSize: 28, color: "#6B635C", fontFamily: "sans-serif" }}>Free shipping · 30-day returns</div>
+        <div style={{ fontSize: 28, color: "#B9C4DC", fontFamily: "sans-serif" }}>Free shipping · 30-day returns</div>
       </div>
       {/* hang tag */}
       <div
@@ -49,13 +49,13 @@ export default function OpengraphImage() {
           alignItems: "center",
         }}
       >
-        <div style={{ width: 2, height: 120, background: "#1F1B18", opacity: 0.5 }} />
+        <div style={{ width: 2, height: 120, background: "#E9DCC0", opacity: 0.8 }} />
         <div
           style={{
             width: 210,
             height: 300,
-            background: "#FFFFFF",
-            border: "2px solid #B8864B",
+            background: "#FBF8F1",
+            border: "2px solid #C9A35E",
             borderRadius: 10,
             display: "flex",
             flexDirection: "column",
@@ -65,12 +65,12 @@ export default function OpengraphImage() {
           }}
         >
           <div
-            style={{ width: 26, height: 26, borderRadius: 13, border: "5px solid #B8864B", background: "#1F1B18" }}
+            style={{ width: 26, height: 26, borderRadius: 13, border: "5px solid #C9A35E", background: "#0F1D3A" }}
           />
-          <div style={{ marginTop: 40, fontSize: 20, letterSpacing: 5, color: "#6B635C", fontFamily: "sans-serif" }}>
+          <div style={{ marginTop: 40, fontSize: 20, letterSpacing: 5, color: "#56617A", fontFamily: "sans-serif" }}>
             UNDER
           </div>
-          <div style={{ fontSize: 96, lineHeight: 1 }}>$35</div>
+          <div style={{ fontSize: 96, lineHeight: 1, color: "#0F1D3A" }}>$35</div>
         </div>
       </div>
     </div>,

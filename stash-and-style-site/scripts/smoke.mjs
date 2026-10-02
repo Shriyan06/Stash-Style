@@ -38,6 +38,7 @@ async function newPage(width = 1280) {
   page.goto = async (url, opts) => {
     const res = await goto(url, opts);
     await page.waitForSelector("html[data-hydrated]", { timeout: 15000 });
+    await page.waitForTimeout(700); // let late Suspense boundaries hydrate too
     return res;
   };
   return page;
@@ -148,7 +149,7 @@ if (demo) {
   });
 
   await step("gallery: arrow keys move between images", async () => {
-    await page.goto(base + "/products/demo-ring-01", { waitUntil: "load" });
+    await page.goto(base + "/products/demo-stacking-ring-set", { waitUntil: "load" });
     const track = page.locator('[aria-roledescription="carousel"]');
     await track.focus();
     await page.keyboard.press("ArrowRight");
@@ -176,35 +177,52 @@ if (demo) {
     await page.getByText("US 7", { exact: true }).click();
     assert(await add.isEnabled(), "add still disabled after choosing options");
     await add.click();
-    await page.waitForSelector("dialog[open] >> text=Demo Ring 01");
+    await page.waitForSelector("dialog[open] >> text=Stacking Ring Set");
     const label = await page.getByRole("button", { name: /^Bag/ }).getAttribute("aria-label");
     assert(label === "Bag, 1 item", `bag label: ${label}`);
     await page.locator("dialog[open]").getByRole("button", { name: "Increase quantity" }).click();
     await page.waitForSelector("dialog[open] >> text=$28.00");
   });
 
-  await step("checkout shows the not-connected notice (local provider)", async () => {
+  await step("checkout opens the branded preview, validates, and never places an order", async () => {
     await page
       .locator("dialog[open]")
       .getByRole("button", { name: /Checkout/ })
       .click();
-    await page.waitForSelector("text=Checkout opens once the store is connected");
+    await page.waitForURL(/\/checkout$/);
+    await page.waitForSelector("text=Checkout preview.");
+    assert(
+      (await page.locator("input[autocomplete^='cc-'], input[name*='card' i]").count()) === 0,
+      "card inputs present",
+    );
+    await page.getByRole("button", { name: /Pay now/ }).click();
+    await page.waitForSelector("text=Enter an email address");
+    assert((await focused(page)).startsWith("input"), "focus not moved to first invalid field");
+    await page.getByPlaceholder("Email").fill("test@example.com");
+    await page.getByPlaceholder("First name").fill("Sam");
+    await page.getByPlaceholder("Last name").fill("Lee");
+    await page.getByPlaceholder("Address", { exact: true }).fill("1 Main St");
+    await page.getByPlaceholder("City").fill("Austin");
+    await page.getByLabel("State", { exact: true }).selectOption("TX");
+    await page.getByPlaceholder("ZIP code").fill("78701");
+    await page.getByRole("button", { name: /Pay now/ }).click();
+    await page.waitForSelector("dialog[open] >> text=No order was placed");
     await page.keyboard.press("Escape");
   });
 
   await step("bag persists across reloads and syncs to the cart page", async () => {
     await page.goto(base + "/cart", { waitUntil: "load" });
     await page.waitForSelector("text=Order summary");
-    assert(await page.getByText("Demo Ring 01").first().isVisible(), "line missing on /cart");
+    assert(await page.getByText("Stacking Ring Set").first().isVisible(), "line missing on /cart");
   });
 
   await step("wishlist toggle is a pressed button and shows on /wishlist", async () => {
     await page.goto(base + "/collections/earrings", { waitUntil: "load" });
-    const heart = page.getByRole("button", { name: /Save Demo Earrings 01/ });
+    const heart = page.getByRole("button", { name: /Save Everyday Hoop Earrings/ });
     await heart.click();
     assert((await heart.getAttribute("aria-pressed")) === "true", "aria-pressed not true");
     await page.goto(base + "/wishlist", { waitUntil: "load" });
-    await page.waitForSelector("text=Demo Earrings 01");
+    await page.waitForSelector("text=Everyday Hoop Earrings");
   });
 }
 

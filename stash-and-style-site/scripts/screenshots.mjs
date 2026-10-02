@@ -38,6 +38,17 @@ for (const route of routes) {
     if (action === "menu") await page.getByRole("button", { name: "Open menu" }).click();
     if (action === "search") await page.keyboard.press("/");
     if (action) await page.waitForTimeout(500);
+    // scroll through so lazy images load, then back to the top
+    if (!action) {
+      await page.evaluate(async () => {
+        for (let y = 0; y < document.body.scrollHeight; y += 600) {
+          window.scrollTo(0, y);
+          await new Promise((r) => setTimeout(r, 60));
+        }
+        window.scrollTo(0, 0);
+      });
+      await page.waitForTimeout(400);
+    }
     // reveal everything for full-page shots
     await page.evaluate(() =>
       document.querySelectorAll(".reveal").forEach((el) => el.setAttribute("data-shown", "true")),

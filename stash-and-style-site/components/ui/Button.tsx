@@ -2,17 +2,19 @@ import Link from "next/link";
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/cn";
 
-export type ButtonVariant = "primary" | "secondary" | "accent" | "ghost" | "light";
+export type ButtonVariant = "primary" | "secondary" | "accent" | "gold" | "ghost" | "light" | "outline-light";
 type Size = "md" | "sm";
 
 const base =
   "relative inline-flex select-none items-center justify-center gap-2 rounded-full font-medium tracking-[0.01em] whitespace-nowrap transition-[background-color,color,border-color,transform] duration-200 ease-brand active:translate-y-px disabled:cursor-not-allowed disabled:opacity-45 disabled:active:translate-y-0";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-ink text-surface hover:bg-[#3a332e]",
+  primary: "bg-ink text-surface hover:bg-navy",
   secondary: "border border-ink text-ink hover:bg-ink hover:text-surface",
-  accent: "bg-accent-strong text-accent-ink hover:bg-[#6f4a20]",
+  accent: "bg-accent-strong text-accent-ink hover:bg-[#6f4f18]",
+  gold: "bg-accent text-ink hover:bg-[#d8b878] shine",
   ghost: "text-ink hover:bg-ink/5",
+  "outline-light": "border border-surface/70 text-surface hover:bg-surface hover:text-ink",
   light: "bg-surface text-ink hover:bg-bg",
 };
 

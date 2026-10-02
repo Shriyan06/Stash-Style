@@ -2,9 +2,6 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { body, display } from "./fonts";
 import { CommerceProvider } from "@/components/cart/CommerceProvider";
-import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
-import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
 import { LazyPanels } from "@/components/layout/LazyPanels";
 import { RevealObserver } from "@/components/ui/RevealObserver";
 import { JsonLd } from "@/components/JsonLd";
@@ -24,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FBF7F2",
+  themeColor: "#0E1A33",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -42,17 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <CommerceProvider connected={isCommerceConnected}>
-          {env.demoMode && (
-            <p className="bg-blush py-1.5 text-center text-xs font-semibold tracking-[0.12em] uppercase">
-              Demo mode: placeholder products, not for sale
-            </p>
-          )}
-          <AnnouncementBar messages={site.announcements} />
-          <Header />
-          <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
-            {children}
-          </main>
-          <Footer />
+          {children}
           <LazyPanels />
         </CommerceProvider>
         <RevealObserver />

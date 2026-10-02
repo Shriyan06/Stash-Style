@@ -1,27 +1,17 @@
 import type { Product, ProductImage, Variant } from "@/lib/catalog/types";
+import demoImages from "./demo-images.json";
 
 /**
  * DEMO MODE ONLY (NEXT_PUBLIC_DEMO_MODE=true).
- * Neutral placeholder products for judging grids, cards, filters and the cart.
- * Plain tinted blocks, no photos, obviously labelled "Demo".
+ * Sample products for judging grids, cards, filters, the bag and the checkout preview.
+ * Images are rendered ILLUSTRATIONS (scripts/render-demo-images.mjs), not photos of real stock.
+ * Every card carries a DEMO ribbon and every page a demo banner.
  */
 
 const daysAgo = (d: number) => new Date(Date.now() - d * 86_400_000).toISOString();
 
-const tints = {
-  gold: ["#E9D6BE", "#DCC3A3"],
-  silver: ["#E3E4E2", "#CFD2CF"],
-  rose: ["#F1DAD3", "#E5C2B7"],
-  pearl: ["#F2ECE3", "#E6DCCF"],
-};
-type Tone = keyof typeof tints;
-
-const img = (title: string, tone: Tone, n = 0): ProductImage => ({
-  alt: `${title}, ${tone === "rose" ? "rose gold" : tone}-tone placeholder image`,
-  width: 800,
-  height: 1000,
-  tint: tints[tone][n],
-});
+type ImageKey = keyof typeof demoImages;
+type Tone = "gold" | "silver" | "rose" | "pearl";
 
 const colorName: Record<Tone, string> = {
   gold: "Gold-tone",
@@ -30,97 +20,196 @@ const colorName: Record<Tone, string> = {
   pearl: "Pearl",
 };
 
+const img = (key: ImageKey, alt: string): ProductImage => {
+  const m = demoImages[key];
+  return { src: m.src, width: m.width, height: m.height, alt };
+};
+
 type Spec = {
-  n: number;
-  kind: "Ring" | "Earrings" | "Necklace" | "Bracelet" | "Set";
+  title: string;
   collection: string;
   price: number;
   compareAt?: number;
-  tones: Tone[];
+  /** One entry per colour: [tone, main image, hover image] */
+  looks: [Tone, ImageKey, ImageKey][];
   sizes?: string[];
   soldOut?: boolean;
   age: number;
+  blurb: string;
 };
 
 const specs: Spec[] = [
   {
-    n: 1,
-    kind: "Ring",
-    collection: "rings-1",
-    price: 14,
-    tones: ["gold", "silver"],
-    sizes: ["5", "6", "7", "8", "9"],
-    age: 3,
+    title: "Everyday Hoop Earrings",
+    collection: "earrings",
+    price: 16,
+    looks: [
+      ["gold", "hoops-gold", "hoops-gold-navy"],
+      ["silver", "drop-earrings", "hoops-gold-navy"],
+    ],
+    age: 5,
+    blurb: "Medium hoops that go with everything, from jeans to a dress.",
   },
   {
-    n: 2,
-    kind: "Ring",
+    title: "Pearl Stud Earrings",
+    collection: "earrings",
+    price: 22,
+    looks: [["pearl", "pearl-studs", "pearl-studs-navy"]],
+    age: 40,
+    blurb: "Small round pearl-look studs for a polished finish.",
+  },
+  {
+    title: "Blue Drop Earrings",
+    collection: "earrings",
+    price: 19,
+    compareAt: 0,
+    looks: [["silver", "drop-earrings", "set-silver"]],
+    soldOut: true,
+    age: 90,
+    blurb: "A fine drop with a deep-blue stone. Back soon.",
+  },
+  {
+    title: "Coin Pendant Necklace",
+    collection: "necklace",
+    price: 26,
+    looks: [
+      ["gold", "pendant-gold", "pendant-gold-navy"],
+      ["silver", "layered-silver", "layered-mixed-navy"],
+    ],
+    age: 2,
+    blurb: "A small coin pendant on a fine chain. Wear it alone or layered.",
+  },
+  {
+    title: "Layered Chain Necklace",
+    collection: "necklace",
+    price: 29,
+    compareAt: 34,
+    looks: [["silver", "layered-silver", "layered-mixed-navy"]],
+    age: 25,
+    blurb: "Two lengths in one piece for an easy layered look.",
+  },
+  {
+    title: "Stacking Ring Set",
+    collection: "rings-1",
+    price: 14,
+    looks: [
+      ["gold", "rings-stack-gold", "rings-stack-navy"],
+      ["silver", "silver-bands", "rings-stack-navy"],
+    ],
+    sizes: ["5", "6", "7", "8", "9"],
+    age: 3,
+    blurb: "Three slim bands to wear together or split up.",
+  },
+  {
+    title: "Green Stone Cocktail Ring",
     collection: "rings-1",
     price: 18,
     compareAt: 24,
-    tones: ["gold"],
+    looks: [["rose", "cocktail-ring", "rings-stack-navy"]],
     sizes: ["6", "7", "8"],
     age: 12,
+    blurb: "A single green stone on a slim rose gold-tone band.",
   },
   {
-    n: 3,
-    kind: "Ring",
+    title: "Mixed Metal Bands",
     collection: "rings-1",
     price: 12,
-    tones: ["silver", "rose", "gold"],
+    looks: [
+      ["silver", "silver-bands", "rings-stack-navy"],
+      ["rose", "cocktail-ring", "rings-stack-navy"],
+      ["gold", "rings-stack-gold", "rings-stack-navy"],
+    ],
     sizes: ["5", "6", "7", "8"],
     age: 60,
+    blurb: "Two-tone stacking bands for mixing metals.",
   },
-  { n: 1, kind: "Earrings", collection: "earrings", price: 16, tones: ["gold", "silver"], age: 5 },
-  { n: 2, kind: "Earrings", collection: "earrings", price: 22, tones: ["pearl"], age: 40 },
-  { n: 3, kind: "Earrings", collection: "earrings", price: 19, compareAt: 0, tones: ["rose"], soldOut: true, age: 90 },
-  { n: 1, kind: "Necklace", collection: "necklace", price: 26, tones: ["gold", "silver", "rose", "pearl"], age: 2 },
-  { n: 2, kind: "Necklace", collection: "necklace", price: 29, compareAt: 34, tones: ["gold"], age: 25 },
-  { n: 1, kind: "Bracelet", collection: "bracelets", price: 17, tones: ["gold", "silver"], age: 8 },
-  { n: 2, kind: "Bracelet", collection: "bracelets", price: 21, tones: ["silver"], age: 120 },
-  { n: 1, kind: "Set", collection: "elegance-set", price: 32, tones: ["gold"], age: 15 },
-  { n: 2, kind: "Set", collection: "elegance-set", price: 34, compareAt: 34, tones: ["silver", "gold"], age: 45 },
+  {
+    title: "Bangle Stack",
+    collection: "bracelets",
+    price: 17,
+    looks: [
+      ["gold", "bangles-gold", "bangles-navy"],
+      ["silver", "chain-bracelet", "bangles-navy"],
+    ],
+    age: 8,
+    blurb: "Five slim bangles in mixed tones. Wear all five or a few.",
+  },
+  {
+    title: "Fine Chain Bracelet",
+    collection: "bracelets",
+    price: 21,
+    looks: [["silver", "chain-bracelet", "chain-bracelet-gold"]],
+    age: 120,
+    blurb: "A delicate chain with an adjustable fit.",
+  },
+  {
+    title: "Pearl Necklace & Earring Set",
+    collection: "elegance-set",
+    price: 32,
+    looks: [["gold", "set-gold", "set-gold-navy"]],
+    age: 15,
+    blurb: "A matching pearl-look pendant and studs, ready to give.",
+  },
+  {
+    title: "Blue Stone Gift Set",
+    collection: "elegance-set",
+    price: 34,
+    compareAt: 34,
+    looks: [
+      ["silver", "set-silver", "set-gold-navy"],
+      ["gold", "set-gold-navy", "set-gold"],
+    ],
+    age: 45,
+    blurb: "Necklace and earrings with deep-blue stones, matched for you.",
+  },
 ];
 
+const slug = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
 export const demoProducts: Product[] = specs.map((s, i) => {
-  const title = `Demo ${s.kind} ${String(s.n).padStart(2, "0")}`;
-  const handle = `demo-${s.kind.toLowerCase()}-${String(s.n).padStart(2, "0")}`;
-  const images = s.tones.flatMap((t) => [img(title, t, 0), img(title, t, 1)]);
+  const handle = `demo-${slug(s.title)}`;
+  const images = s.looks.flatMap(([tone, a, b]) => [
+    img(a, `${s.title} in ${colorName[tone].toLowerCase()}, illustration`),
+    img(b, `${s.title} on navy velvet, illustration`),
+  ]);
   const variants: Variant[] = [];
-  s.tones.forEach((tone, ti) => {
-    const sizes = s.sizes ?? [null];
-    sizes.forEach((size) => {
+  s.looks.forEach(([tone], ti) => {
+    for (const size of s.sizes ?? [null]) {
       const options: Variant["options"] = {};
-      if (s.tones.length > 1) options.Color = colorName[tone];
+      if (s.looks.length > 1) options.Color = colorName[tone];
       if (size) options.Size = size;
       variants.push({
         id: `${handle}-${tone}${size ? `-${size}` : ""}`,
         title: [options.Color, size && `US ${size}`].filter(Boolean).join(" / ") || "Default",
         price: s.price,
         compareAtPrice: s.compareAt ?? null,
-        available: !s.soldOut && !(size === "9"),
+        available: !s.soldOut && size !== "9",
         options,
         imageIndex: ti * 2,
       });
-    });
+    }
   });
   const options: Product["options"] = [];
-  if (s.tones.length > 1) options.push({ name: "Color", values: s.tones.map((t) => colorName[t]) });
+  if (s.looks.length > 1) options.push({ name: "Color", values: s.looks.map(([t]) => colorName[t]) });
   if (s.sizes) options.push({ name: "Size", values: s.sizes });
 
   return {
     id: `demo-${i + 1}`,
     handle,
-    title,
-    description:
-      "This is a demo product used to preview the store layout. It isn't for sale.\n\nReal product descriptions, details and photos appear here once your catalog is connected.",
+    title: s.title,
+    description: `${s.blurb}\n\nThis is a sample product for previewing the store. It isn't for sale, and the picture is an illustration.`,
     collections: [s.collection],
-    tags: ["demo", s.kind.toLowerCase()],
+    tags: ["demo", s.collection],
     createdAt: daysAgo(s.age),
     images,
     options,
     variants,
-    details: ["Demo detail: material comes from product data", "Demo detail: measurements come from product data"],
+    details: ["Sample details: real materials and measurements come from your product data"],
     featuredRank: i,
     demo: true,
   };

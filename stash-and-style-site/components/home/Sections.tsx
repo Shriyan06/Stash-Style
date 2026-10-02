@@ -21,7 +21,7 @@ export function ShopByCategory({ collections }: { collections: Collection[] }) {
         title="Find your next favorite"
         link={{ href: "/collections", label: "All collections" }}
       />
-      <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-5 lg:gap-x-6">
+      <ul className="stagger-children mt-8 grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-5 lg:gap-x-6">
         {collections.map((c, i) => (
           <li
             key={c.handle}
@@ -46,7 +46,7 @@ export function ShopByCategory({ collections }: { collections: Collection[] }) {
 export function ComingSoonCard() {
   return (
     <div className="grid overflow-hidden rounded-img border border-line bg-surface md:grid-cols-[1fr_1.2fr]">
-      <div className="relative min-h-56 bg-blush">
+      <div className="relative min-h-56 bg-tint">
         <HangTag
           top="Coming"
           amount="Soon"
@@ -93,11 +93,11 @@ export function NewArrivals({ products }: { products: ProductSummary[] }) {
 }
 
 export function EditorialSplit() {
-  const img = brandImage("braceletFeature");
+  const img = brandImage("freshGems");
   return (
     <section aria-labelledby="stack-title" className="container-x reveal py-16 lg:py-24">
       <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-16">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-img bg-blush">
+        <div className="group relative aspect-[4/3] overflow-hidden rounded-img bg-tint">
           {img && (
             <Image
               src={img.src}
@@ -106,21 +106,21 @@ export function EditorialSplit() {
               sizes="(min-width: 768px) 50vw, 100vw"
               placeholder="blur"
               blurDataURL={img.blurDataURL}
-              className="object-cover"
+              className="zoom-img object-cover"
             />
           )}
         </div>
         <div className="max-w-md">
-          <p className="eyebrow text-accent-strong">Bracelets</p>
+          <p className="eyebrow text-accent-strong">Necklaces</p>
           <h2 id="stack-title" className="mt-3 font-display text-h1">
-            Stack them <em className="font-medium">your</em> way
+            Layer it <em className="font-medium text-accent-strong">up</em>
           </h2>
           <p className="mt-4 text-muted">
-            One chain on its own is easy. Three is a look. Mix gold-tone with silver-tone, thin with chunky, and add one
+            One chain on its own is easy. Two or three is a look. Mix lengths and tones, add a pendant, and build it one
             piece at a time until it feels like yours.
           </p>
-          <ButtonLink href="/collections/bracelets" className="mt-8">
-            Shop bracelets
+          <ButtonLink href="/collections/necklace" className="mt-8">
+            Shop necklaces
           </ButtonLink>
         </div>
       </div>
@@ -151,32 +151,33 @@ const gifts = [
 
 export function Gifts() {
   return (
-    <section aria-labelledby="gift-title" className="reveal bg-blush py-16 lg:py-24">
+    <section aria-labelledby="gift-title" className="on-navy reveal bg-navy py-16 text-surface lg:py-24">
       <div className="container-x">
         <SectionHeading
+          onDark
           id="gift-title"
           eyebrow="Gift guide"
           title={
             <>
-              Gifts under <em className="font-medium">$35</em>
+              Gifts under <em className="font-medium text-accent">$35</em>
             </>
           }
         />
-        <ul className="mt-8 grid gap-4 md:grid-cols-3 lg:gap-6">
+        <ul className="stagger-children mt-8 grid gap-4 md:grid-cols-3 lg:gap-6">
           {gifts.map((g) => (
             <li key={g.href}>
               <Link
                 href={g.href}
-                className="group relative flex h-full flex-col rounded-img border border-ink/10 bg-bg p-6 pt-10 transition-shadow duration-200 hover:shadow-soft sm:p-8 sm:pt-12"
+                className="group relative flex h-full flex-col rounded-img border border-surface/15 bg-navy-deep/50 p-6 pt-10 transition-[background-color,transform] duration-300 hover:-translate-y-1 hover:bg-navy-deep sm:p-8 sm:pt-12"
               >
                 {/* punched tag hole: echoes the hero's hang tag */}
                 <span
                   aria-hidden="true"
-                  className="absolute top-4 left-1/2 size-3.5 -translate-x-1/2 rounded-full border-2 border-accent bg-blush"
+                  className="absolute top-4 left-1/2 size-3.5 -translate-x-1/2 rounded-full border-2 border-accent bg-navy"
                 />
                 <h3 className="font-display text-h3">{g.title}</h3>
-                <p className="mt-2 text-muted">{g.text}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-[0.9375rem] font-medium">
+                <p className="mt-2 text-on-navy-muted">{g.text}</p>
+                <span className="mt-6 inline-flex items-center gap-2 text-[0.9375rem] font-medium text-accent">
                   {g.cta}{" "}
                   <ArrowIcon size={16} className="transition-transform duration-200 group-hover:translate-x-0.5" />
                 </span>
@@ -216,7 +217,7 @@ export function StyleTips({ postSlugs }: { postSlugs: string[] }) {
         title="Small tricks, big difference"
         link={postSlugs.length ? { href: "/blog", label: "Read the blog" } : undefined}
       />
-      <ul className="mt-8 grid gap-x-8 gap-y-6 border-t border-line pt-8 md:grid-cols-3">
+      <ul className="stagger-children mt-8 grid gap-x-8 gap-y-6 border-t border-line pt-8 md:grid-cols-3">
         {tips.map((t) => {
           const linked = postSlugs.includes(t.slug);
           const body = (
@@ -247,7 +248,7 @@ export function StyleTips({ postSlugs }: { postSlugs: string[] }) {
   );
 }
 
-const tiles = ["#F3E3DC", "#DDE5DA", "#EFE6DA", "#E9D6BE", "#F3E3DC", "#DDE5DA"];
+const tiles = ["#E8EEF8", "#142A57", "#F3EBDA", "#1E3A70", "#E8EEF8", "#C9A35E"];
 
 export function FollowStrip() {
   const { instagram, tiktok } = site.social;
@@ -259,14 +260,17 @@ export function FollowStrip() {
         <h2 id="follow-title" className="mt-2 font-display text-h2">
           Follow {site.socialHandle}
         </h2>
-        <ul aria-hidden="true" className="mx-auto mt-8 grid max-w-4xl grid-cols-3 gap-2 sm:grid-cols-6 sm:gap-3">
+        <ul
+          aria-hidden="true"
+          className="stagger-children mx-auto mt-8 grid max-w-4xl grid-cols-3 gap-2 sm:grid-cols-6 sm:gap-3"
+        >
           {tiles.map((c, i) => (
             <li
               key={i}
               className="flex aspect-square items-center justify-center rounded-img"
               style={{ background: c }}
             >
-              {i === 2 && <span className="font-display text-2xl text-accent-strong italic">S&amp;S</span>}
+              {i === 1 && <span className="font-display text-2xl text-accent italic">S&amp;S</span>}
             </li>
           ))}
         </ul>
@@ -276,7 +280,7 @@ export function FollowStrip() {
               href={instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-6 text-[0.9375rem] font-medium text-surface hover:bg-[#3a332e]"
+              className="inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-6 text-[0.9375rem] font-medium text-surface hover:bg-navy"
             >
               <InstagramIcon size={18} /> Instagram<span className="sr-only"> (opens in a new tab)</span>
             </a>
@@ -299,7 +303,7 @@ export function FollowStrip() {
 
 export function NewsletterSection() {
   return (
-    <section aria-labelledby="news-title" className="reveal bg-sage/60 py-16 lg:py-24">
+    <section aria-labelledby="news-title" className="reveal bg-tint py-16 lg:py-24">
       <div className="container-x grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
         <h2 id="news-title" className="font-display text-h2 lg:text-h1">
           Be the first to know about new collections and exclusive offers

@@ -86,7 +86,7 @@ export function Gallery({ images, title, activeIndex }: { images: Img[]; title: 
           {list.map((img, i) => (
             <div
               key={i}
-              className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden bg-blush [@media(pointer:fine)]:cursor-zoom-in"
+              className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden bg-tint [@media(pointer:fine)]:cursor-zoom-in"
               onMouseMove={(e) => {
                 if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
                 const r = e.currentTarget.getBoundingClientRect();

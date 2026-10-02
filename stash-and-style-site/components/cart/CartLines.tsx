@@ -66,7 +66,7 @@ export function CartLines({ onNavigate, compact }: { onNavigate?: () => void; co
           <Link
             href={`/products/${l.handle}`}
             onClick={onNavigate}
-            className={cn("relative shrink-0 overflow-hidden rounded-img bg-blush", compact ? "w-20" : "w-24 sm:w-28")}
+            className={cn("relative shrink-0 overflow-hidden rounded-img bg-tint", compact ? "w-20" : "w-24 sm:w-28")}
             style={{ aspectRatio: "4 / 5" }}
             tabIndex={-1}
             aria-hidden="true"

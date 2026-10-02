@@ -8,7 +8,7 @@ export const metadata = pageMetadata({ title: "Account", path: "/account", noind
 export default function AccountPage() {
   return (
     <div className="container-x flex flex-col items-center py-20 text-center lg:py-28">
-      <span className="inline-flex size-16 items-center justify-center rounded-full bg-blush">
+      <span className="inline-flex size-16 items-center justify-center rounded-full bg-tint">
         <UserIcon size={26} />
       </span>
       <h1 className="mt-6 font-display text-h1">Accounts are coming soon</h1>

@@ -6,21 +6,24 @@
    Run `npm run check:contrast` after editing.
    ───────────────────────────────────────────────────────────── */
 :root {
-  --bg: #fbf7f2; /* warm cream page */
+  --bg: #f5f7fb; /* cool off-white page */
   --surface: #ffffff;
-  --ink: #1f1b18;
-  --muted: #6b635c;
-  --line: #e8dfd5; /* hairlines (decorative) */
-  --line-strong: #958778; /* form control borders (3:1) */
-  --accent: #b8864b; /* warm gold-tone: decoration, focus ring */
-  --accent-strong: #855a28; /* gold-tone for text and filled buttons (AA) */
+  --ink: #0f1d3a; /* navy-black: text and primary buttons */
+  --navy: #142a57; /* brand navy: hero, footer, feature sections */
+  --navy-deep: #0b1833; /* announcement bar, deepest surfaces */
+  --on-navy-muted: #b9c4dc; /* secondary text on navy */
+  --muted: #56617a;
+  --line: #dde3ee; /* hairlines (decorative) */
+  --line-strong: #828ba1; /* form control borders (3:1) */
+  --accent: #c9a35e; /* gold-tone: decoration, and text on navy */
+  --accent-strong: #8a6421; /* gold-tone for text, focus ring, filled buttons on light backgrounds */
   --accent-ink: #ffffff;
-  --blush: #f3e3dc;
-  --sage: #dde5da;
+  --tint: #e8eef8; /* ice-blue panels */
+  --champagne: #f3ebda; /* "New" badge, warm highlights */
   --danger: #b3261e;
   --success: #2e6b4a;
 
-  --shadow-soft: 0 1px 2px rgb(31 27 24 / 0.04), 0 12px 32px -12px rgb(31 27 24 / 0.18);
+  --shadow-soft: 0 1px 2px rgb(15 29 58 / 0.05), 0 14px 34px -14px rgb(15 29 58 / 0.28);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --dur: 200ms;
   --header-h: 4.5rem;
@@ -55,7 +58,7 @@
     text-wrap: pretty;
   }
   ::selection {
-    background: var(--blush);
+    background: var(--tint);
     color: var(--ink);
   }
   :focus-visible {
@@ -234,7 +237,207 @@
 .hang-tag {
   transform-origin: 50% 0;
   transform: rotate(-1deg);
-  animation: tag-swing 1600ms var(--ease) 400ms both;
+  animation: tag-swing 1600ms var(--ease) 500ms both;
+  cursor: grab;
+}
+/* hover gives it another nudge */
+.hang-tag:hover {
+  animation: tag-nudge 1400ms var(--ease) both;
+}
+@keyframes tag-nudge {
+  0% {
+    transform: rotate(-1deg);
+  }
+  25% {
+    transform: rotate(7deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(1.5deg);
+  }
+  100% {
+    transform: rotate(-1deg);
+  }
+}
+.tag-glint {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: glint 3.6s ease-in-out 2.2s infinite;
+  opacity: 0;
+}
+@keyframes glint {
+  0%,
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1) rotate(45deg);
+  }
+  90% {
+    opacity: 0;
+    transform: scale(0.4) rotate(90deg);
+  }
+}
+
+/* ─── Slideshow ─────────────────────────────────────────── */
+.slide[data-active] .kenburns {
+  animation: kenburns 9s ease-out both;
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.08) translate3d(-1.5%, -1%, 0);
+  }
+}
+.slide[data-active] .stagger > * {
+  animation: rise 800ms var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 110ms + 150ms);
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.slide-progress {
+  transform: scaleX(0);
+  animation: progress linear forwards;
+}
+.slide-progress.paused {
+  animation: none;
+  transform: none;
+}
+@keyframes progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Focus ring stays visible on navy surfaces */
+.on-navy :focus-visible,
+footer :focus-visible {
+  outline-color: var(--accent);
+}
+
+/* ─── Micro-interactions ────────────────────────────────── */
+/* gold sweep across gold buttons */
+.shine {
+  overflow: hidden;
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+.shine:hover::after {
+  transform: translateX(120%);
+  transition: transform 800ms var(--ease);
+}
+/* count badges pop when the number changes */
+.pop {
+  animation: pop 450ms var(--ease) both;
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.4);
+  }
+  60% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* bag icon wiggles when something is added */
+.wiggle {
+  animation: wiggle 600ms var(--ease) both;
+}
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(-12deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-6deg);
+  }
+  80% {
+    transform: rotate(3deg);
+  }
+}
+.heart-pop {
+  animation: pop 420ms var(--ease) both;
+}
+/* product cards lift slightly on hover */
+.lift {
+  transition: transform 300ms var(--ease);
+}
+.lift:hover {
+  transform: translateY(-4px);
+}
+.lift:hover .lift-shadow {
+  box-shadow: var(--shadow-soft);
+}
+.lift-shadow {
+  transition: box-shadow 300ms var(--ease);
+}
+/* grids: children rise one after another when the section scrolls in */
+.js .reveal[data-shown="true"] .stagger-children > * {
+  animation: rise 700ms var(--ease) both;
+}
+.js .reveal .stagger-children > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+.js .reveal .stagger-children > *:nth-child(3) {
+  animation-delay: 160ms;
+}
+.js .reveal .stagger-children > *:nth-child(4) {
+  animation-delay: 240ms;
+}
+.js .reveal .stagger-children > *:nth-child(5) {
+  animation-delay: 320ms;
+}
+.js .reveal .stagger-children > *:nth-child(6) {
+  animation-delay: 400ms;
+}
+.js .reveal .stagger-children > *:nth-child(n + 7) {
+  animation-delay: 480ms;
+}
+.js .reveal:not([data-shown]) .stagger-children > * {
+  opacity: 0;
+}
+/* announcement messages fade in */
+.fade-in {
+  animation: fade-in 500ms var(--ease) both;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Dialog-based drawers and modals */
@@ -262,18 +465,18 @@ dialog.sheet[open] {
   }
 }
 dialog.sheet::backdrop {
-  background: rgb(31 27 24 / 0);
+  background: rgb(11 24 51 / 0);
   transition:
     background 260ms var(--ease),
     overlay 260ms allow-discrete,
     display 260ms allow-discrete;
 }
 dialog.sheet[open]::backdrop {
-  background: rgb(31 27 24 / 0.45);
+  background: rgb(11 24 51 / 0.55);
 }
 @starting-style {
   dialog.sheet[open]::backdrop {
-    background: rgb(31 27 24 / 0);
+    background: rgb(11 24 51 / 0);
   }
 }
 dialog.sheet[data-side="right"] {
@@ -333,7 +536,7 @@ html:has(dialog[open]) {
 
 /* Skeleton shimmer */
 .skeleton {
-  background: linear-gradient(90deg, var(--line) 0%, #f3ece4 50%, var(--line) 100%);
+  background: linear-gradient(90deg, var(--line) 0%, #eef2f8 50%, var(--line) 100%);
   background-size: 200% 100%;
   animation: shimmer 1.4s linear infinite;
 }

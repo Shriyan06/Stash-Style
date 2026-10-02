@@ -45,7 +45,7 @@ export default function BlogIndex() {
           {posts.map((p) => (
             <li key={p.slug}>
               <Link href={`/blog/${p.slug}`} className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-img bg-blush">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-img bg-tint">
                   {p.cover && (
                     <Image
                       src={p.cover}

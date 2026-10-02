@@ -51,7 +51,7 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
         {post.excerpt && <p className="mt-4 text-lg text-muted">{post.excerpt}</p>}
       </header>
       {post.cover && (
-        <div className="relative mx-auto mt-10 aspect-[16/9] max-w-5xl overflow-hidden rounded-img bg-blush">
+        <div className="relative mx-auto mt-10 aspect-[16/9] max-w-5xl overflow-hidden rounded-img bg-tint">
           <Image
             src={post.cover}
             alt=""

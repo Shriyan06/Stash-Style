@@ -28,7 +28,7 @@ export function AnnouncementBar({ messages }: { messages: readonly string[] }) {
 
   return (
     <div
-      className="relative bg-ink text-bg"
+      className="relative bg-navy-deep text-surface"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -37,7 +37,7 @@ export function AnnouncementBar({ messages }: { messages: readonly string[] }) {
       <div className="container-x flex h-11 items-center justify-center px-12">
         <p className="eyebrow text-[0.6875rem]">
           {messages.map((m, n) => (
-            <span key={m} hidden={n !== i}>
+            <span key={m} hidden={n !== i} className={n === i ? "fade-in inline-block" : undefined}>
               {m}
             </span>
           ))}

@@ -20,7 +20,8 @@
     "brand:fetch": "node scripts/fetch-brand-images.mjs",
     "screenshots": "node scripts/screenshots.mjs",
     "verify:shopify": "node scripts/verify-shopify.mjs",
-    "test:smoke": "node scripts/smoke.mjs"
+    "test:smoke": "node scripts/smoke.mjs",
+    "demo:images": "node scripts/render-demo-images.mjs"
   },
   "dependencies": {
     "marked": "^18.0.14",

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * Downloads the placeholder brand imagery from the current store into /public/brand.
+ * Run `npm run demo:images` first: when a download fails, the matching studio illustration is used.
  * If a download fails (or the image is too small for its use), it generates a tinted
  * line-art placeholder at the target size instead, so the site never ships a broken image.
  *
@@ -22,15 +23,19 @@ const CDN = "https://stashandstyle.store/cdn/shop/files/";
 const images = [
   {
     key: "hero",
+    render: "slide-everyday",
+    renderAlt: "Illustration of layered gold-tone and silver-tone necklaces and stacked rings on navy velvet",
     file: "hero-lifestyle.jpg",
     urls: [CDN + "f26866cf-c622-4d83-b43a-46f54dbf14cf_1888x.jpg?v=1769030676"],
     minWidth: 800,
-    size: [1888, 1180],
+    size: [2000, 1250],
     alt: "A woman wearing layered gold-tone necklaces and stacked rings",
     art: { motif: "hero", from: "#E9D3C4", to: "#C99A6B" },
   },
   {
     key: "braceletFeature",
+    render: "bangles-navy",
+    renderAlt: "Illustration of stacked gold-tone and rose gold-tone bangles on navy velvet",
     file: "bracelets-feature.jpg",
     urls: [CDN + "9fb37958-270c-421d-b32c-1247b8fbeca8_1888x.jpg?v=1769006780"],
     minWidth: 800,
@@ -40,6 +45,8 @@ const images = [
   },
   {
     key: "ringsSeasonal",
+    render: "rings-stack-navy",
+    renderAlt: "Illustration of a gold-tone band and a silver-tone ring with a blue stone on navy velvet",
     file: "rings-seasonal.jpg",
     urls: [
       CDN + "d3ed0fff7e828ff8ba4c97c6be030289_1888x.jpg?v=1765831036",
@@ -52,6 +59,8 @@ const images = [
   },
   {
     key: "eleganceSet",
+    render: "set-gold-navy",
+    renderAlt: "Illustration of a matching necklace and hoop earrings on navy velvet",
     file: "elegance-set.jpg",
     urls: [
       CDN + "1768c1a3b85bba500adcbe1cd06b7398_1888x.jpg?v=1764026987",
@@ -64,6 +73,8 @@ const images = [
   },
   {
     key: "earringsPromo",
+    render: "hoops-gold-navy",
+    renderAlt: "Illustration of gold-tone hoop earrings on navy velvet",
     file: "earrings-promo.jpg",
     urls: [
       CDN + "8a0570130b9eecf48f0f5639b5f3825d_1888x.jpg?v=1768409742",
@@ -76,6 +87,8 @@ const images = [
   },
   {
     key: "braceletsPromo",
+    render: "chain-bracelet",
+    renderAlt: "Illustration of a fine silver-tone chain bracelet",
     file: "bracelets-promo.jpg",
     urls: [
       CDN + "6a7763db-9185-4c10-a9b1-660844b06527_1888x.jpg?v=1768937917",
@@ -88,6 +101,8 @@ const images = [
   },
   {
     key: "freshGems",
+    render: "layered-mixed-navy",
+    renderAlt: "Illustration of layered necklaces with a pearl pendant on navy velvet",
     file: "fresh-gems.jpg",
     urls: [
       CDN + "b2ae3205d3d4c7e8e3ae9b8b4c60dee1_1888x.jpg?v=1768946136",
@@ -97,6 +112,28 @@ const images = [
     size: [1200, 1782],
     alt: "Pendant necklaces arranged on a soft cream background",
     art: { motif: "necklace", from: "#F5EDE4", to: "#D2AE86" },
+  },
+  {
+    key: "slide2",
+    file: "slide-stack.jpg",
+    urls: [CDN + "9fb37958-270c-421d-b32c-1247b8fbeca8_1888x.jpg?v=1769006780"],
+    minWidth: 1200,
+    size: [2000, 1250],
+    alt: "Stacked bracelets worn together",
+    render: "slide-stack",
+    renderAlt: "Illustration of a stack of mixed-tone bangles and a chain on navy velvet",
+    art: { motif: "bangles", from: "#F3E3DC", to: "#D9B48C" },
+  },
+  {
+    key: "slide3",
+    file: "slide-gifts.jpg",
+    urls: [CDN + "1768c1a3b85bba500adcbe1cd06b7398_1888x.jpg?v=1764026987"],
+    minWidth: 1200,
+    size: [2000, 1250],
+    alt: "A jewelry gift set in its box",
+    render: "slide-gifts",
+    renderAlt: "Illustration of a gift box holding a pearl necklace and earrings, tied with a gold ribbon",
+    art: { motif: "set", from: "#E4E9E1", to: "#B9A07E" },
   },
 ];
 
@@ -223,22 +260,29 @@ for (const img of images) {
     report.push(`${img.key}: ${url} downloaded but only ${meta?.width ?? "?"}px wide — discarded`);
     rmSync(dest, { force: true });
   }
+  let alt = img.alt;
   if (source === "placeholder") {
     const [w, h] = img.size;
-    await sharp(Buffer.from(placeholderSvg(img.art, w, h)))
-      .jpeg({ quality: 82, mozjpeg: true })
-      .toFile(dest);
-    report.push(`${img.key}: download failed or too small → generated ${w}×${h} placeholder`);
+    const rendered = img.render && path.join(root, "public/demo", `${img.render}.jpg`);
+    if (rendered && existsSync(rendered)) {
+      // studio illustration from scripts/render-demo-images.mjs
+      await sharp(rendered).resize(w, h, { fit: "cover" }).jpeg({ quality: 84, mozjpeg: true }).toFile(dest);
+      alt = img.renderAlt;
+      report.push(`${img.key}: download failed → used illustration ${img.render}`);
+    } else {
+      await sharp(Buffer.from(placeholderSvg(img.art, w, h)))
+        .jpeg({ quality: 82, mozjpeg: true })
+        .toFile(dest);
+      alt = ""; // line art is decorative
+      report.push(`${img.key}: download failed or too small → generated ${w}×${h} placeholder`);
+    }
   }
   const meta = await sharp(dest).metadata();
   manifest[img.key] = {
     src: `/brand/${img.file}`,
     width: meta.width,
     height: meta.height,
-    alt:
-      source === "placeholder"
-        ? "" // placeholder art is decorative; real photos get real alt text
-        : img.alt,
+    alt,
     intendedAlt: img.alt,
     blurDataURL: await blurDataURL(dest),
     placeholder: source === "placeholder",

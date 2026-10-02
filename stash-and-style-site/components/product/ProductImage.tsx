@@ -37,7 +37,7 @@ export function ProductImage({
       aria-label={image?.alt}
       aria-hidden={image ? undefined : true}
       className={cn("absolute inset-0 flex items-center justify-center", className)}
-      style={{ background: image?.tint ?? "var(--blush)" }}
+      style={{ background: image?.tint ?? "var(--tint)" }}
     >
       {title && (
         // SVG monogram: decorative watermark, not text content
