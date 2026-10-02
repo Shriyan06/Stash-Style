@@ -1,0 +1,73 @@
+{
+  "hero": {
+    "src": "/brand/hero-lifestyle.jpg",
+    "width": 1888,
+    "height": 1180,
+    "alt": "",
+    "intendedAlt": "A woman wearing layered gold-tone necklaces and stacked rings",
+    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAHAAwDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAMG/8QAGhAAAwADAQAAAAAAAAAAAAAAAAECBBQhMf/EABQBAQAAAAAAAAAAAAAAAAAAAAT/xAAWEQEBAQAAAAAAAAAAAAAAAAABAAL/2gAMAwEAAhEDEQA/ANHsKX0neXLrwAI6ZRkv/9k=",
+    "placeholder": true,
+    "source": "placeholder"
+  },
+  "braceletFeature": {
+    "src": "/brand/bracelets-feature.jpg",
+    "width": 1600,
+    "height": 1200,
+    "alt": "",
+    "intendedAlt": "A stack of gold-tone and silver-tone bracelets worn on one wrist",
+    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAJAAwDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAwIG/8QAGhAAAwADAQAAAAAAAAAAAAAAAAECAxETMf/EABUBAQEAAAAAAAAAAAAAAAAAAAME/8QAFhEBAQEAAAAAAAAAAAAAAAAAAQAC/9oADAMBAAIRAxEAPwDW9UmRWadhWC/Sd0zmb//Z",
+    "placeholder": true,
+    "source": "placeholder"
+  },
+  "ringsSeasonal": {
+    "src": "/brand/rings-seasonal.jpg",
+    "width": 1200,
+    "height": 1500,
+    "alt": "",
+    "intendedAlt": "Several rings stacked on two fingers",
+    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAPAAwDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAgMEBv/EABkQAAMBAQEAAAAAAAAAAAAAAAABAhEDEv/EABQBAQAAAAAAAAAAAAAAAAAAAAP/xAAWEQADAAAAAAAAAAAAAAAAAAAAAQL/2gAMAwEAAhEDEQA/ANcrWgXS9E99MYiu70B0MpP/2Q==",
+    "placeholder": true,
+    "source": "placeholder"
+  },
+  "eleganceSet": {
+    "src": "/brand/elegance-set.jpg",
+    "width": 1200,
+    "height": 1500,
+    "alt": "",
+    "intendedAlt": "A matching necklace and earrings set laid out together",
+    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAPAAwDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAwQG/8QAGhAAAwADAQAAAAAAAAAAAAAAAAECAxESIf/EABUBAQEAAAAAAAAAAAAAAAAAAAID/8QAFhEBAQEAAAAAAAAAAAAAAAAAAQAC/9oADAMBAAIRAxEAPwDXK1v0K6XQF5XLJ7zvok6mF//Z",
+    "placeholder": true,
+    "source": "placeholder"
+  },
+  "earringsPromo": {
+    "src": "/brand/earrings-promo.jpg",
+    "width": 1200,
+    "height": 1500,
+    "alt": "",
+    "intendedAlt": "Close-up of gold-tone hoop earrings",
+    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAPAAwDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAwb/xAAaEAADAAMBAAAAAAAAAAAAAAAAAQIDERIh/8QAFAEBAAAAAAAAAAAAAAAAAAAAA//EABYRAAMAAAAAAAAAAAAAAAAAAAABAv/aAAwDAQACEQMRAD8Ar+/Q7pdAXlaYFZ3sB0OpP//Z",
+    "placeholder": true,
+    "source": "placeholder"
+  },
+  "braceletsPromo": {
+    "src": "/brand/bracelets-promo.jpg",
+    "width": 1200,
+    "height": 1500,
+    "alt": "",
+    "intendedAlt": "Chain bracelets in gold-tone and silver-tone",
+    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAPAAwDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAwQG/8QAGhAAAgMBAQAAAAAAAAAAAAAAAAIBAxESIf/EABUBAQEAAAAAAAAAAAAAAAAAAAID/8QAFREBAQAAAAAAAAAAAAAAAAAAAQD/2gAMAwEAAhEDEQA/ANf36G7R0TvZk6A186TWQX//2Q==",
+    "placeholder": true,
+    "source": "placeholder"
+  },
+  "freshGems": {
+    "src": "/brand/fresh-gems.jpg",
+    "width": 1200,
+    "height": 1782,
+    "alt": "",
+    "intendedAlt": "Pendant necklaces arranged on a soft cream background",
+    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAASAAwDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAMBBAb/xAAbEAACAgMBAAAAAAAAAAAAAAAAAQIDERIxIv/EABUBAQEAAAAAAAAAAAAAAAAAAAMC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAQAC/9oADAMBAAIRAxEAPwDZbZYubWwt2YYqd3roLqUKLCvLoAG1l//Z",
+    "placeholder": true,
+    "source": "placeholder"
+  },
+  "logo": null
+}

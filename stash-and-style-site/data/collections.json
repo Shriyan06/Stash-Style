@@ -1,0 +1,37 @@
+[
+  {
+    "handle": "earrings",
+    "title": "Earrings",
+    "shortLabel": "Earrings",
+    "description": "Hoops, studs and drops in gold-tone and silver-tone. Easy to wear every day, and easy to swap out when the mood changes.",
+    "image": "earringsPromo"
+  },
+  {
+    "handle": "necklace",
+    "title": "Necklaces",
+    "shortLabel": "Necklaces",
+    "description": "Chains and pendants that work alone or layered. Mix lengths to build your own stack.",
+    "image": null
+  },
+  {
+    "handle": "rings-1",
+    "title": "Rings",
+    "shortLabel": "Rings",
+    "description": "Stackable bands and statement rings in US sizes. Wear one, or wear five.",
+    "image": "ringsSeasonal"
+  },
+  {
+    "handle": "bracelets",
+    "title": "Bracelets",
+    "shortLabel": "Bracelets",
+    "description": "Chains, cuffs and bangles made for stacking. Start with one and add as you go.",
+    "image": "braceletFeature"
+  },
+  {
+    "handle": "elegance-set",
+    "title": "Elegance Set",
+    "shortLabel": "Sets",
+    "description": "Matching pieces put together for you. A simple way to look finished, and an easy gift.",
+    "image": "eleganceSet"
+  }
+]

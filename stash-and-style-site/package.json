@@ -1,0 +1,46 @@
+{
+  "name": "stash-and-style-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "dev:demo": "NEXT_PUBLIC_DEMO_MODE=true next dev",
+    "prebuild": "node scripts/prelaunch-check.mjs",
+    "build": "next build",
+    "build:demo": "NEXT_PUBLIC_DEMO_MODE=true next build",
+    "start": "next start",
+    "lint": "eslint --max-warnings=0 .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run lint && npm run typecheck && npm run check:contrast && npm run build",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "check:prelaunch": "node scripts/prelaunch-check.mjs",
+    "brand:fetch": "node scripts/fetch-brand-images.mjs",
+    "screenshots": "node scripts/screenshots.mjs",
+    "verify:shopify": "node scripts/verify-shopify.mjs",
+    "test:smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "marked": "^18.0.14",
+    "next": "16.3.8",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.8",
+    "playwright-core": "^1.63.0",
+    "prettier": "^3.9.9",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
